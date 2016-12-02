@@ -75,11 +75,11 @@ $(function ()
             cache: true,
             success:function(data)
             {
-                if(data == 0)
+                if(data.ret == 0)
                 {
                     window.location = "../myBlog/index.html";
                 }
-                else if(data == 1)
+                else if(data.ret == 1)
                 {
                     alert("用户不存在");
                 }
@@ -93,5 +93,59 @@ $(function ()
                 alert("err");
             }
         })
+    });
+
+    // 注销操作
+    $("#logoutTitle").on("click", "a", function ()
+    {
+        $.ajax({
+            type: "post",
+            url: "user/logout",
+            dataType: "text",
+            data: "",
+            cache: true,
+            success:function(data)
+            {
+                if(data == "success")
+                {
+                    $("#titlename").html("欢迎你!" + "<br/>");
+                    $("#logoutTitle").html("");
+                }
+                else
+                {
+                    alert("注销失败");
+                }
+            },
+            error:function()
+            {
+                alert("err");
+            }
+        })
+    });
+
+    // 在session中检查用户是否登录
+    $.ajax({
+        type: "post",
+        url: "user/checkout",
+        dataType: "json",
+        data: "",
+        cache: true,
+        success:function(data)
+        {
+            if(data.nickname == null)
+            {
+                $("#titlename").html("欢迎你!" + "<br/>" + data.username);
+                $("#logoutTitle").html("<br/><a id=\"logout\" style=\"cursor:pointer\">退出</a>");
+            }
+            else
+            {
+                $("#titlename").html("欢迎你!" + "<br/>" + data.nickname);
+                $("#logoutTitle").html("<br/><a id=\"logout\" style=\"cursor:pointer\">退出</a>");
+            }
+
+        },
+        error:function()
+        {
+        }
     })
 });

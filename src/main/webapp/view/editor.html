@@ -11,7 +11,7 @@ Classic Template
 http://www.cssmoban.com/tm-488-classic
 -->
     <!-- load stylesheets -->
-    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
+    <!--<link rel="stylesheet" href="http://fonts.useso.com/css?family=Open+Sans:300,400">  &lt;!&ndash; Google web font "Open Sans" &ndash;&gt;-->
     <link rel="stylesheet" href="../css/bootstrap.min.css">                                      <!-- Bootstrap style -->
     <link rel="stylesheet" href="../css/templatemo-style.css">                                   <!-- Templatemo style -->
     <link rel="stylesheet" href="../css/homepage.css">
@@ -35,11 +35,51 @@ http://www.cssmoban.com/tm-488-classic
     </style>
 </head>
 <body>
+
+<div class="tm-header">
+    <div class="container-fluid">
+        <div class="tm-header-inner">
+            <a href="#" class="navbar-brand tm-site-name">Love Story</a>
+
+            <!-- navbar -->
+            <nav class="navbar tm-main-nav">
+
+                <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#tmNavbar">
+                    &#9776;
+                </button>
+
+                <div class="collapse navbar-toggleable-sm" id="tmNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link">主页</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="editor.html" class="nav-link">编写博客</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blog.html" class="nav-link">博客</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="center.html" class="nav-link">个人中心</a>
+                        </li>
+                        <li class="nav-item">
+                            欢迎你！<br/>
+                            XXX
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+
+        </div>
+    </div>
+</div>
+
 <div class="background">
         <div class="word">
-            <p style="float: left;">文章标题：</p>
+            <p style="float: left;color: white;">文章标题：</p>
             <input id="title" class="form-control">
-            <p style="float: left;">文章分类：</p>
+            <p style="float: left;color: white;">文章分类：</p>
             <select id="classes" class="form-control">
                 <option>我们的故事</option>
                 <option>奇闻趣事</option>
@@ -203,8 +243,8 @@ http://www.cssmoban.com/tm-488-classic
 </script>
 
         <!-- load JS files -->
-        <script src="../js/jquery-1.9.1.min.js"></script>             <!-- jQuery (https://jquery.com/download/) -->
-        <script src="../js/bootstrap.min.js"></script>                 <!-- Bootstrap (http://v4-alpha.getbootstrap.com/) -->
+        <script src="../jslib/jquery-1.9.1.min.js"></script>             <!-- jQuery (https://jquery.com/download/) -->
+        <script src="../jslib/bootstrap.min.js"></script>                 <!-- Bootstrap (http://v4-alpha.getbootstrap.com/) -->
         <script src="../js/editor.js"></script>
        
 </body>

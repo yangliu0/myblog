@@ -1,18 +1,21 @@
 package cn.liu5599.controller;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSONObject;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import cn.liu5599.pojo.User;
 import cn.liu5599.service.UserService;
+import org.springframework.web.bind.support.SessionStatus;
 
 
 @Controller
 @RequestMapping("/user")
+@SessionAttributes("LoginUser")
 public class UserController
 {
     @Resource
@@ -31,17 +34,18 @@ public class UserController
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public int login(@RequestParam("username_l") String username, @RequestParam("password_l") String password, HttpSession httpSession)
+    public JSONObject login(Model model, @RequestParam("username_l") String username, @RequestParam("password_l") String password)
     {
         User user;
         //当ret=1时，代表没有此用户
         //当ret=0时，登录成功
         //当ret=2时，密码错误
         int ret;
+        JSONObject json = new JSONObject();
         user = this.userService.getUserByUsername(username);
         if(user == null)
         {
-            return 1;
+            json.put("ret", 1);
         }
 
         String psword = user.getPassword();
@@ -49,13 +53,29 @@ public class UserController
         if(password.equals(psword))
         {
             user.setPassword("");
-            httpSession.setAttribute("LoginUser", user);
-            ret = 0;
+            // 添加session信息
+            model.addAttribute("LoginUser", user);
+            json.put("ret", 0);
         }
         else
         {
-            ret = 2;
+            json.put("ret", 2);
         }
-        return ret;
+        return json;
+    }
+
+    @RequestMapping(value = "/checkout", method = RequestMethod.POST)
+    @ResponseBody
+    public User checkout(@ModelAttribute("LoginUser") User user)
+    {
+        return user;
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public String logout(SessionStatus sessionStatus)
+    {
+        sessionStatus.setComplete();
+        return "success";
     }
 }
