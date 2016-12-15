@@ -13,7 +13,3 @@ id INT NOT NULL AUTO_INCREMENT							/*用户id,作为主键*/
 );
 
 INSERT INTO user(username,password,nickname,age,email) VALUES (123,123,123,21,'123456789@qq.com');
-INSERT INTO user(username,password,nickname,age,email) VALUES (123,123,123,21,'123456789@qq.com');
-INSERT INTO user(username,password,nickname,age,email) VALUES (123,123,123,21,'123456789@qq.com');
-INSERT INTO user(username,password,nickname,age,email) VALUES (123,123,123,21,'123456789@qq.com');
-INSERT INTO user(username,password,nickname,age,email) VALUES (123,123,123,21,'123456789@qq.com');

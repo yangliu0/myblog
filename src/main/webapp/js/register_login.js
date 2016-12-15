@@ -126,7 +126,7 @@ $(function ()
     // 在session中检查用户是否登录
     $.ajax({
         type: "post",
-        url: "user/checkout",
+        url: "/myBlog/user/checkout",
         dataType: "json",
         data: "",
         cache: true,

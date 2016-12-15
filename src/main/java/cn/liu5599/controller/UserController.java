@@ -21,6 +21,7 @@ public class UserController
     @Resource
     private UserService userService;
 
+    // 注册
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public @ResponseBody JSONObject reg(@RequestParam("username") String username, @RequestParam("password") String password)
     {
@@ -32,6 +33,7 @@ public class UserController
         return json;
     }
 
+    // 登录
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject login(Model model, @RequestParam("username_l") String username, @RequestParam("password_l") String password)
@@ -64,6 +66,7 @@ public class UserController
         return json;
     }
 
+    // 检查是否登录
     @RequestMapping(value = "/checkout", method = RequestMethod.POST)
     @ResponseBody
     public User checkout(@ModelAttribute("LoginUser") User user)
@@ -71,6 +74,7 @@ public class UserController
         return user;
     }
 
+    // 注销
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody
     public String logout(SessionStatus sessionStatus)
