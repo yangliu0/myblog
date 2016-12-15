@@ -13,12 +13,22 @@ public class Article {
 
     private String articleClasses;
 
+    private String articleUrl;
+
     private Integer clickRate;
 
     private String articleContent;
 
+    // 文章id，用于获取自增id值
+    private Integer pid;
+
     public Integer getId() {
         return id;
+    }
+
+    public Integer getPid()
+    {
+        return pid;
     }
 
     public void setId(Integer id) {
@@ -55,6 +65,14 @@ public class Article {
 
     public void setArticleClasses(String articleClasses) {
         this.articleClasses = articleClasses == null ? null : articleClasses.trim();
+    }
+
+    public String getArticleUrl() {
+        return articleUrl;
+    }
+
+    public void setArticleUrl(String articleUrl) {
+        this.articleUrl = articleUrl == null ? null : articleUrl.trim();
     }
 
     public Integer getClickRate() {

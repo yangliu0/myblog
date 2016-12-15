@@ -7,13 +7,14 @@
     <result column="article_time" property="articleTime" jdbcType="TIMESTAMP" />
     <result column="article_title" property="articleTitle" jdbcType="VARCHAR" />
     <result column="article_classes" property="articleClasses" jdbcType="VARCHAR" />
+    <result column="article_url" property="articleUrl" jdbcType="VARCHAR" />
     <result column="click_rate" property="clickRate" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="cn.liu5599.pojo.Article" extends="BaseResultMap" >
     <result column="article_content" property="articleContent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, article_author, article_time, article_title, article_classes, click_rate
+    id, article_author, article_time, article_title, article_classes, article_url, click_rate
   </sql>
   <sql id="Blob_Column_List" >
     article_content
@@ -32,13 +33,13 @@
   </delete>
   <insert id="insert" parameterType="cn.liu5599.pojo.Article" >
     insert into article (id, article_author, article_time, 
-      article_title, article_classes, click_rate, 
-      article_content)
+      article_title, article_classes, article_url, 
+      click_rate, article_content)
     values (#{id,jdbcType=INTEGER}, #{articleAuthor,jdbcType=INTEGER}, #{articleTime,jdbcType=TIMESTAMP}, 
-      #{articleTitle,jdbcType=VARCHAR}, #{articleClasses,jdbcType=VARCHAR}, #{clickRate,jdbcType=INTEGER}, 
-      #{articleContent,jdbcType=LONGVARCHAR})
+      #{articleTitle,jdbcType=VARCHAR}, #{articleClasses,jdbcType=VARCHAR}, #{articleUrl,jdbcType=VARCHAR}, 
+      #{clickRate,jdbcType=INTEGER}, #{articleContent,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.liu5599.pojo.Article" >
+  <insert id="insertSelective" parameterType="cn.liu5599.pojo.Article" useGeneratedKeys="true" keyProperty="pid">
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -55,6 +56,9 @@
       </if>
       <if test="articleClasses != null" >
         article_classes,
+      </if>
+      <if test="articleUrl != null" >
+        article_url,
       </if>
       <if test="clickRate != null" >
         click_rate,
@@ -79,6 +83,9 @@
       <if test="articleClasses != null" >
         #{articleClasses,jdbcType=VARCHAR},
       </if>
+      <if test="articleUrl != null" >
+        #{articleUrl,jdbcType=VARCHAR},
+      </if>
       <if test="clickRate != null" >
         #{clickRate,jdbcType=INTEGER},
       </if>
@@ -102,6 +109,9 @@
       <if test="articleClasses != null" >
         article_classes = #{articleClasses,jdbcType=VARCHAR},
       </if>
+      <if test="articleUrl != null" >
+        article_url = #{articleUrl,jdbcType=VARCHAR},
+      </if>
       <if test="clickRate != null" >
         click_rate = #{clickRate,jdbcType=INTEGER},
       </if>
@@ -117,6 +127,7 @@
       article_time = #{articleTime,jdbcType=TIMESTAMP},
       article_title = #{articleTitle,jdbcType=VARCHAR},
       article_classes = #{articleClasses,jdbcType=VARCHAR},
+      article_url = #{articleUrl,jdbcType=VARCHAR},
       click_rate = #{clickRate,jdbcType=INTEGER},
       article_content = #{articleContent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
@@ -127,6 +138,7 @@
       article_time = #{articleTime,jdbcType=TIMESTAMP},
       article_title = #{articleTitle,jdbcType=VARCHAR},
       article_classes = #{articleClasses,jdbcType=VARCHAR},
+      article_url = #{articleUrl,jdbcType=VARCHAR},
       click_rate = #{clickRate,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

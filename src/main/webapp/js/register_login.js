@@ -100,7 +100,7 @@ $(function ()
     {
         $.ajax({
             type: "post",
-            url: "user/logout",
+            url: "/myBlog/user/logout",
             dataType: "text",
             data: "",
             cache: true,

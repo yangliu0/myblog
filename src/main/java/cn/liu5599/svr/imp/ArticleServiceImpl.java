@@ -16,4 +16,14 @@ public class ArticleServiceImpl implements ArticleService
     {
         return this.articleDao.insertSelective(article);
     }
+
+    public int updateById(Article article)
+    {
+        return this.articleDao.updateByPrimaryKeySelective(article);
+    }
+
+    public Article getById(int id)
+    {
+        return this.articleDao.selectByPrimaryKey(id);
+    }
 }
