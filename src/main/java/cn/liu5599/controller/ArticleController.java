@@ -50,6 +50,7 @@ public class ArticleController
     public ModelAndView toPage(@RequestParam("id") String id)
     {
         Article article = this.articleService.getById(Integer.parseInt(id));
+        //格式化输出时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Map<String, Object> map = new HashMap<String, Object>();
         JSONObject json = new JSONObject();
