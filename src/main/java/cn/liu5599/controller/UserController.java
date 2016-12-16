@@ -82,4 +82,14 @@ public class UserController
         sessionStatus.setComplete();
         return "success";
     }
+
+    //获取用户
+    @RequestMapping(value = "/showUser", method = RequestMethod.POST)
+    @ResponseBody
+    public User showUser(@RequestParam("id") String id)
+    {
+        User user = this.userService.getUserById(Integer.parseInt(id));
+        user.setPassword("");
+        return user;
+    }
 }

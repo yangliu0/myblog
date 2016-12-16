@@ -25,7 +25,7 @@ public class ArticleController
     private ArticleService articleService;
 
     // 新建文章
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public int add(@ModelAttribute("LoginUser") User user, @RequestParam("title") String title, @RequestParam("classes") String classes, @RequestParam("content") String content)
     {
@@ -37,6 +37,8 @@ public class ArticleController
         article.setArticleAuthor(user.getId());
         article.setArticleClasses(classes);
         article.setArticleContent(content);
+        // 新建文章时，将点击量设置为0
+        article.setClickRate(0);
         this.articleService.insertArticle(article);
         int pid = article.getPid();     // 获取文章id
         article = this.articleService.getById(pid);
@@ -50,6 +52,10 @@ public class ArticleController
     public ModelAndView toPage(@RequestParam("id") String id)
     {
         Article article = this.articleService.getById(Integer.parseInt(id));
+
+        //每次阅读，将点击量加1
+        article.setClickRate(article.getClickRate() + 1);
+        this.articleService.updateById(article);
         //格式化输出时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Map<String, Object> map = new HashMap<String, Object>();
