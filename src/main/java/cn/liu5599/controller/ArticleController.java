@@ -6,7 +6,6 @@ import cn.liu5599.pojo.User;
 import cn.liu5599.service.ArticleService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,6 +13,7 @@ import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -69,5 +69,18 @@ public class ArticleController
         json.put("article_url", article.getArticleUrl());
         map.put("page", json);
         return new ModelAndView("details", map);
+    }
+
+    // 列出主页文章
+    @RequestMapping(value = "/listHome", method = RequestMethod.GET)
+    @ResponseBody
+    public Map listHome(@RequestParam("index") String index, @RequestParam("pageSize") String pageSize)
+    {
+        List<Map<String, Object>> list;
+        Map<String, List<Map<String, Object>>> map = new HashMap<String, List<Map<String, Object>>>();
+        list = this.articleService.getHomeList(index, pageSize);
+
+        map.put("ret", list);
+        return map;
     }
 }

@@ -6,6 +6,9 @@ import cn.liu5599.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class ArticleServiceImpl implements ArticleService
 {
@@ -25,5 +28,17 @@ public class ArticleServiceImpl implements ArticleService
     public Article getById(int id)
     {
         return this.articleDao.selectByPrimaryKey(id);
+    }
+
+    // 列出主页上的一个分页的文章内容
+    public List<Map<String, Object>> getHomeList(String index, String pageSize)
+    {
+        int index_int = Integer.parseInt(index);
+        int pageSize_int = Integer.parseInt(pageSize);
+        // article表中倒数start到end行的记录
+        int start = index_int * pageSize_int + 1;
+        int end = (index_int + 1) * pageSize_int;
+
+        return this.articleDao.selectHomeList(start, end);
     }
 }
