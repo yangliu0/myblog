@@ -12,4 +12,5 @@ public interface ArticleService
     public int updateById(Article article);
     public Article getById(int id);
     public List<Map<String, Object>> getHomeList(String index, String pageSize);
+    public int getCount();
 }

@@ -22,4 +22,7 @@ public interface ArticleMapper {
     int updateByPrimaryKey(Article record);
 
     List<Map<String, Object>> selectHomeList(@Param("start")int start, @Param("end") int end);
+
+    // 获取文章总数
+    int selectCount();
 }

@@ -43,14 +43,15 @@ public class ArticleController
         int pid = article.getPid();     // 获取文章id
         article = this.articleService.getById(pid);
         //添加文章url，以便于访问文章详情
-        article.setArticleUrl("127.0.0.1:18080/myBlog/article/details?id=" + pid);
+        article.setArticleUrl("http://127.0.0.1:18080/myBlog/article/" + pid);
         return this.articleService.updateById(article);
     }
 
     // 查看文章详情
-    @RequestMapping(value = "/details", method = RequestMethod.GET)
-    public ModelAndView toPage(@RequestParam("id") String id)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView toPage(@PathVariable(value = "id") String id)
     {
+        System.out.println(id);
         Article article = this.articleService.getById(Integer.parseInt(id));
 
         //每次阅读，将点击量加1
@@ -82,5 +83,13 @@ public class ArticleController
 
         map.put("ret", list);
         return map;
+    }
+
+    // 获取文章总数
+    @RequestMapping(value = "/getCount", method = RequestMethod.GET)
+    @ResponseBody
+    public int getCount()
+    {
+        return this.articleService.getCount();
     }
 }

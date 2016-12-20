@@ -36,9 +36,15 @@ public class ArticleServiceImpl implements ArticleService
         int index_int = Integer.parseInt(index);
         int pageSize_int = Integer.parseInt(pageSize);
         // article表中倒数start到end行的记录
-        int start = index_int * pageSize_int + 1;
-        int end = (index_int + 1) * pageSize_int;
+        int start = index_int * pageSize_int;
+        int end = pageSize_int;
 
         return this.articleDao.selectHomeList(start, end);
+    }
+
+    // 获取文章总数
+    public int getCount()
+    {
+        return this.articleDao.selectCount();
     }
 }

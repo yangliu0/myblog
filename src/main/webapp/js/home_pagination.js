@@ -11,23 +11,60 @@ $(function ()
     var svr;    //请求服务名称
     var paras;  //请求参数，json格式
 
+    svr = "article/listHome";
+
+    paras = {
+        index:currentPage
+        ,pageSize:pageSize
+    };
+
+    var title, content, url_a, time;
+
     // 获取页码总数，并展示第一页内容
     $.ajax({
         type: "get",
-        url: svr,
+        url:"article/listHome",
         dataType: "json",
         data: paras,
         cache: true,
         success:function(data)
         {
-            if(data == 1)
+            console.log(data.ret);
+            $("#currentPage").html(currentPage + 1);
+            var result = data.ret;
+            for(var i= 0; i < result.length; i++)
             {
-                alert("发布成功");
+                console.log(result.length);
+                title = "title" + i;
+                content = "content" + i;
+                url_a = "url" + i;
+                time = "time" + i;
+                $("#" + title).html(result[i].article_title);
+                $("#" + content).html(result[i].article_content);
+                var d = new Date(result[i].article_time);
+                $("#" + time).html(d.toLocaleDateString());
+                $("#" +　url_a).attr("href", result[i].article_url)
             }
         },
         error:function()
         {
-            alert("发布失败")
+            alert("出错")
+        }
+    });
+
+    $.ajax({
+        type: "get",
+        url:"article/getCount",
+        dataType: "json",
+        data: {},
+        cache: true,
+        success:function(data)
+        {
+            $("#totolPage").html(parseInt(data / pageSize + 1));
+        },
+        error:function()
+        {
+            alert("出错")
         }
     });
 
@@ -59,5 +96,43 @@ $(function ()
             // 下一页的页码
             current = ++currentPage;
         }
+
+        var paras = {
+            index:current
+            ,pageSize:pageSize
+        };
+
+        $.ajax({
+            type: "get",
+            url:"article/listHome",
+            dataType: "json",
+            data: paras,
+            cache: true,
+            success:function(data)
+            {
+                console.log(data.ret);
+                $("#currentPage").html(currentPage + 1);
+                var result = data.ret;
+                for(var i= 0; i < result.length; i++)
+                {
+                    console.log(result.length);
+                    title = "title" + i;
+                    content = "content" + i;
+                    url_a = "url" + i;
+                    time = "time" + i;
+                    $("#" + title).html(result[i].article_title);
+                    $("#" + content).html(result[i].article_content);
+                    var d = new Date(result[i].article_time);
+                    $("#" + time).html(d.toLocaleDateString());
+                    $("#" +　url_a).attr("href", result[i].article_url)
+                }
+            },
+            error:function()
+            {
+                alert("出错")
+            }
+        });
+
+
     });
 });
