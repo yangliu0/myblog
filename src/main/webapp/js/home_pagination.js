@@ -29,6 +29,7 @@ $(function ()
         cache: true,
         success:function(data)
         {
+            var str = "";
             console.log(data.ret);
             $("#currentPage").html(currentPage + 1);
             var result = data.ret;
@@ -39,12 +40,21 @@ $(function ()
                 content = "content" + i;
                 url_a = "url" + i;
                 time = "time" + i;
-                $("#" + title).html(result[i].article_title);
-                $("#" + content).html(result[i].article_content);
+                // $("#" + title).html(result[i].article_title);
+                // $("#" + content).html(result[i].article_content);
                 var d = new Date(result[i].article_time);
-                $("#" + time).html(d.toLocaleDateString());
-                $("#" +　url_a).attr("href", result[i].article_url)
+                // $("#" + time).html(d.toLocaleDateString());
+                // $("#" +　url_a).attr("href", result[i].article_url);
+
+                str += "<div class=\"col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3\"><div" + " class='tm-content-box'><img"
+                + " src=\"img/tm-img-310x180-" + (i + 1) + ".jpg\" alt=\"Image\" class=\"tm-margin-b-20 img-fluid\" />"
+                + "<h4 id=\"title0\" class=\"tm-margin-b-20 tm-gold-text\" style=\"height: 100%;width:100%;overflow: hidden;text-overflow:ellipsis;word-break:keep-all;white-space:nowrap;\">"
+                    + result[i].article_title + "</h4><div id=\"content0\" style=\"height: 136px;width:100%;overflow:hidden;text-overflow:ellipsis;word-break:keep-all;\">"
+                + result[i].article_content + "</div><div id=\"time0\" style=\"margin-top: 20px;\">"
+                + d.toLocaleDateString() + "</div><a id=\"url0\" href="
+                + result[i].article_url +" class='tm-btn text-uppercase' target=\"_blank\" style=\"margin-top: 20px;\">详情</a></div></div>";
             }
+            $("#home_list").html(str);
         },
         error:function()
         {
@@ -113,6 +123,7 @@ $(function ()
                 console.log(data.ret);
                 $("#currentPage").html(currentPage + 1);
                 var result = data.ret;
+                var str = "";
                 for(var i= 0; i < result.length; i++)
                 {
                     console.log(result.length);
@@ -120,12 +131,21 @@ $(function ()
                     content = "content" + i;
                     url_a = "url" + i;
                     time = "time" + i;
-                    $("#" + title).html(result[i].article_title);
-                    $("#" + content).html(result[i].article_content);
+                    // $("#" + title).html(result[i].article_title);
+                    // $("#" + content).html(result[i].article_content);
                     var d = new Date(result[i].article_time);
-                    $("#" + time).html(d.toLocaleDateString());
-                    $("#" +　url_a).attr("href", result[i].article_url)
+                    // $("#" + time).html(d.toLocaleDateString());
+                    // $("#" +　url_a).attr("href", result[i].article_url)
+
+                    str += "<div class=\"col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3\"><div" + " class='tm-content-box'><img"
+                        + " src=\"img/tm-img-310x180-" + (i + 1) + ".jpg\" alt=\"Image\" class=\"tm-margin-b-20 img-fluid\" />"
+                        + "<h4 id=\"title0\" class=\"tm-margin-b-20 tm-gold-text\" style=\"height: 100%;width:100%;overflow: hidden;text-overflow:ellipsis;word-break:keep-all;white-space:nowrap;\">"
+                        + result[i].article_title + "</h4><div id=\"content0\" style=\"height: 136px;width:100%;overflow:hidden;text-overflow:ellipsis;word-break:keep-all;\">"
+                        + result[i].article_content + "</div><div id=\"time0\" style=\"margin-top: 20px;\">"
+                        + d.toLocaleDateString() + "</div><a id=\"url0\" href="
+                        + result[i].article_url +" class='tm-btn text-uppercase' target=\"_blank\" style=\"margin-top: 20px;\">详情</a></div></div>";
                 }
+                $("#home_list").html(str);
             },
             error:function()
             {

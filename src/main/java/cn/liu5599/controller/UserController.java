@@ -1,6 +1,7 @@
 package cn.liu5599.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -69,9 +70,18 @@ public class UserController
     // 检查是否登录
     @RequestMapping(value = "/checkout", method = RequestMethod.POST)
     @ResponseBody
-    public User checkout(@ModelAttribute("LoginUser") User user)
+    public User checkout(HttpServletRequest req)
     {
-        return user;
+        User user = (User)req.getSession().getAttribute("LoginUser");
+        if(user == null)
+        {
+            //返回一个空User，代表session中没有登录用户
+            return new User();
+        }
+        else
+        {
+            return user;
+        }
     }
 
     // 注销
